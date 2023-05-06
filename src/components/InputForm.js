@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { QAData } from "../data";
 
-function InputForm({ onAdd }) {
+function InputForm({ onAdd, notify }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const question = e.target[0].value;
@@ -12,6 +12,8 @@ function InputForm({ onAdd }) {
       QAData.push({ question, answer });
       e.target[0].value = "";
       e.target[1].value = "";
+    } else {
+      notify();
     }
   };
   return (
