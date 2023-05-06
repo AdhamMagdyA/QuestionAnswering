@@ -2,17 +2,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import InputForm from "./components/InputForm";
 import QAList from "./components/QAList";
+import { QAData } from "./data";
+import { useState } from "react";
 
 function App() {
+  const [data, setData] = useState(QAData);
+  const handleAddQA = (QA) => {
+    setData([...data, QA]);
+  };
+  const deleteAll = () => {
+    setData([]);
+    QAData.splice(0, QAData.length);
+  };
+  const deleteQA = (index) => {
+    setData(data.filter((QA, i) => i !== index));
+    QAData.splice(index, 1);
+  };
   return (
     <Container className="App text-center p-3">
       <Row className="justify-content-center px-5">
         <Col sm="4 text-center  fs-2">سؤال و جواب</Col>
         <Col sm="8">
-          <InputForm />
+          <InputForm onAdd={handleAddQA} />
           <div className="my-3"></div>
-          <QAList />
-          <Button className="my-2 w-100">مسح الكل</Button>{" "}
+          <QAList data={data} deleteQuestion={deleteQA} />
+          {data.length ? (
+            <Button className="my-2 w-100" onClick={deleteAll}>
+              مسح الكل
+            </Button>
+          ) : null}
         </Col>
       </Row>
     </Container>

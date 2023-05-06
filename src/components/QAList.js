@@ -1,31 +1,33 @@
-import React from "react";
 import { Accordion, Button, Col, Row } from "react-bootstrap";
 
-function QAList() {
-  const QADate = [
-    { question: "سؤال 1", answer: "جواب 1" },
-    { question: "سؤال 2", answer: "جواب 2" },
-  ];
+function QAList({ data, deleteQuestion }) {
   return (
     <div>
       <Accordion defaultActiveKey="0">
-        {QADate.map((QA, index) => {
-          return (
-            <Accordion.Item eventKey={index}>
-              <Accordion.Header>
-                <div className="mx-3">{QA.question}</div>
-              </Accordion.Header>
-              <Accordion.Body>
-                <Row>
-                  <Col sm="10">{QA.answer}</Col>
-                  <Col sm="2">
-                    <i className="bi bi-trash clickable trash-icon"></i>
-                  </Col>
-                </Row>
-              </Accordion.Body>
-            </Accordion.Item>
-          );
-        })}
+        {data.length ? (
+          data.map((QA, index) => {
+            return (
+              <Accordion.Item key={index} eventKey={index}>
+                <Accordion.Header>
+                  <div className="mx-3">{QA.question}</div>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Row>
+                    <Col sm="10">{QA.answer}</Col>
+                    <Col sm="2">
+                      <i
+                        className="bi bi-trash clickable trash-icon"
+                        onClick={() => deleteQuestion(index)}
+                      ></i>
+                    </Col>
+                  </Row>
+                </Accordion.Body>
+              </Accordion.Item>
+            );
+          })
+        ) : (
+          <div className="text-muted fs-4 pt-3"> لا يوجد أسئلة </div>
+        )}
       </Accordion>
     </div>
   );
