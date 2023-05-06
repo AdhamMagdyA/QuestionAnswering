@@ -1,4 +1,4 @@
-import { Accordion, Button, Col, Row } from "react-bootstrap";
+import { Accordion, Col, Row } from "react-bootstrap";
 
 function QAList({ data, deleteQuestion }) {
   return (
