@@ -7,17 +7,22 @@ import { useState } from "react";
 
 function App() {
   const [data, setData] = useState(QAData);
+  console.log("data", data);
   const handleAddQA = (QA) => {
+    localStorage.setItem("QAData", JSON.stringify([...data, QA]));
     setData([...data, QA]);
   };
   const deleteAll = () => {
     setData([]);
     QAData.splice(0, QAData.length);
+    localStorage.removeItem("QAData");
   };
   const deleteQA = (index) => {
     setData(data.filter((QA, i) => i !== index));
     QAData.splice(index, 1);
+    localStorage.setItem("QAData", JSON.stringify(QAData));
   };
+
   return (
     <Container className="App text-center p-3">
       <Row className="justify-content-center px-5">
