@@ -1,6 +1,7 @@
 # Question Answering
 A ReactJS application to save your questions and answers to them in a nice style with react bootstrap.
 # How to run 
+*make sure to have NodeJS and npm installed on your machine*
 - clone the project
 - open a terminal in the project directory
 - run `npm install`
